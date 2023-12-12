@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { SimpleGrid } from '@chakra-ui/react';
 import { collection, getDocs, getFirestore } from 'firebase/firestore';
 
-const ItemDetailContainer = () => {
+const ItemDetailContainer = ({productosProp}) => {
 
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true);

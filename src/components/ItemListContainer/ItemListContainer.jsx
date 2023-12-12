@@ -1,14 +1,11 @@
 import React from 'react'
-
+import { useParams } from 'react-router-dom'
+import ItemList from '../ItemList'
+import { Center } from '@chakra-ui/react'
 
 //Consumir Conexiones -> Eleccion por Categoria
 const ItemListContainer = () => {
-  const productos = [
-    {id: 1, titulo: "Producto A", descripcion: "descripcion del producto A", precio: 1000, categoria:"A",},
-    {id: 2, titulo: "Producto B", descripcion: "descripcion del producto B", precio: 1500, categoria:"B",},
-    {id: 3, titulo: "Producto C", descripcion: "descripcion del producto C", precio: 2000, categoria:"C",},
-    {id: 4, titulo: "Producto D", descripcion: "descripcion del producto D", precio: 2500 , categoria:"D",}   
-  ]
+const { category } = useParams()
 
   const mostrarProductos = new Promise ((resolve, reject) => {
     if (productos.length > 0){
@@ -28,21 +25,13 @@ const ItemListContainer = () => {
     console.log(error)
   })
 
-
-
-
+  const filteredProducts = productos.filter((productos) => productos.categoria === category)
   return (
     <div>
-        {
-        productos.map((p)=> {
-          return(
-            <div key={p.id}>
-            <h2>Producto: {p.titulo}</h2>
-            <h4>$ {p.precio}</h4>
-            </div>
-          )
-        })
-      }
+      <Center p="1rem">
+        <ItemList productos={filteredProducts}>
+      </ItemList>
+      </Center>
         {/* <ItemCount /> */}
     </div>
   )
